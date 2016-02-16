@@ -31,11 +31,10 @@ public class TodoPlannerTextUI {
 			printMenu();
 			int choice = 0; // get user answer
 			while(!validChoice){ // make sure valid choice
-				try{
+				try{ 
 					choice	= input.nextInt();
 					if(choice > 6 || choice < 0){	
 						System.out.println("Invalid choice, please try again: ");
-						choice = input.nextInt();
 					}
 					else
 						validChoice = true;
@@ -162,16 +161,15 @@ public class TodoPlannerTextUI {
 		while(!done){
 			try{
 			rChoice	= input.nextInt();
-			if(rChoice > 3 || rChoice < 0){	
-				System.out.println("Invalid choice, please try again: ");
-				rChoice = input.nextInt();
+			if(rChoice > 3 || rChoice < 1){	
+				System.out.print("Invalid choice, please try again: ");
 			}
 			else
 				done = true;
 			}
 			catch(InputMismatchException e){
 				System.out.println("Please enter a number: ");
-				input.next(); //clear scanner of input
+				input.nextLine(); //clear scanner of input
 				continue;
 			}
 		}
