@@ -18,6 +18,8 @@ public class Meeting extends Todo {
 	}
 	
 	/**
+	 * <h1>Get Location</h1>
+	 * <p>
 	 * Returns the current String value of the location variable
 	 * @return this.location
 	 */
@@ -26,6 +28,8 @@ public class Meeting extends Todo {
 	}
 	
 	/**
+	 * <h1>Get Time</h1>
+	 * <p>
 	 * Returns the current String value of the time variable
 	 * @return this.time
 	 */
@@ -34,6 +38,8 @@ public class Meeting extends Todo {
 	}
 
 	/**
+	 * <h1>Overriden Print Item</h1>
+	 * <p>
 	 * This method is an overriden method of the super class
 	 * It will print out all of the important information about
 	 * this specific object 

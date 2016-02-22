@@ -1,9 +1,10 @@
+import java.io.Serializable;
 
-public class Todo {
+public class Todo implements Serializable {
 	private String title;
 	
 	/**
-	 * Constructor for creation of a new Todo object
+	 * <h1>Constructor for creation of a new Todo object<h1>
 	 * 
 	 * @param title String that will be set to it
 	 */
@@ -12,6 +13,8 @@ public class Todo {
 	}
 	
 	/**
+	 * <h1>Current Title</h1>
+	 * <p>
 	 * Gets the current title of the class
 	 * 
 	 * @return String title
@@ -21,6 +24,8 @@ public class Todo {
 	}
 	
 	/**
+	 * <h1> Print Item</h1>
+	 * <p>
 	 * Prints the current item title name
 	 */
 	public void printItem() {

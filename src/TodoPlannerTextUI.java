@@ -1,26 +1,32 @@
 /**
- * Author: Kevin Tran	                                    
- * Date Created: 2/14/2016                                   		                                *
+ * Date Modified: 2/15/2016                                		                                *
  * Class: CPSC 224_02 Object-Oriented Programming           
  * Prof: Bruce Worobec                                 		
- * Assignment: #3 (Todo-Planner)			
+ * Assignment: #4 (Todo-Planner) w/ File I/O			
  *  														
- * Description:												
+ * Description:	
+ * <p>											
  * This program is designed to be a todo planner for the user
  * It will run menu that opens up and will keep going until user tells it to quit
  * This todo planner will allow you to add things such as:
  * Task, Meetings and Deadlines
- * You can add them, remove them and display them.		
- *          												
+ * You can add them, remove them and display them.	
+ * Now you can save your named file and load it back.	
+ *            
+ * @author  Kevin Tran
+ * @version 1.5
+ * @since   2/21/16											
  * */
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TodoPlannerTextUI {
 	private static boolean isRunning = true; //Boolean to decide if we will continue to run
 	private static Scanner input = new Scanner(System.in); //Scanner object to take user input
-
+	private static FileHandler fh = new FileHandler(); //File handler
+	
 	public static void main(String[] args) {
 
 		System.out.println("Welcome to the Todo Planner!");
@@ -33,7 +39,7 @@ public class TodoPlannerTextUI {
 			while(!validChoice){ // make sure valid choice
 				try{ 
 					choice	= input.nextInt();
-					if(choice > 6 || choice < 0){	
+					if(choice > 8 || choice < 0){	
 						System.out.println("Invalid choice, please try again: ");
 					}
 					else
@@ -52,8 +58,10 @@ public class TodoPlannerTextUI {
 	}
 
 	/**
+	 * <h1>Print Menu</h1>
+	 * <p>
 	 * This function prints the "Menu"
-	 * Goes from 1-6 for item choice and then
+	 * Goes from 1-8 for item choice and then
 	 * your choice at the end.
 	 * 
 	 */
@@ -64,11 +72,15 @@ public class TodoPlannerTextUI {
 		System.out.println("3. Create a Deadline");
 		System.out.println("4. Remove a Todo Item");
 		System.out.println("5. Display Todo Items");
-		System.out.println("6. Exit");
+		System.out.println("6. Save List to File");
+		System.out.println("7. Load List from File");
+		System.out.println("8. Exit");
 		System.out.println("Choice: ");
 	}
 	
 	/**
+	 * <h1>Handle Choice</h1>
+	 * <p>
 	 * This function is a boolean that will take the 
 	 * int that is entered and put it in a switch statement to choose which to execute
 	 * Also a boolean called completedAction to ensure once it is true that we 
@@ -103,6 +115,14 @@ public class TodoPlannerTextUI {
 			completedAction = true;
 			break;
 		case 6:
+			saveListToFile();
+			completedAction = true;
+			break;
+		case 7:
+			loadListFromFile();
+			completedAction = true;
+			break;
+		case 8:
 			System.out.println("Thanks for running, Good Bye");
 			isRunning = false;
 			completedAction = true;
@@ -114,6 +134,8 @@ public class TodoPlannerTextUI {
 	}
 	
 	/**
+	 * <h1>Process Titles</h1>
+	 * <p>
 	 * This function processes the title of the todo item
 	 * It takes in user input and uses a planner function 
 	 * To check if it is not taken
@@ -131,6 +153,8 @@ public class TodoPlannerTextUI {
 	}
 	
 	/**
+	 * <h1>Removal Processer</h1>
+	 * <p>
 	 * This takes user input for the item that the user
 	 * wishes to have removed
 	 * While loop to each if we can remove this item
@@ -146,6 +170,8 @@ public class TodoPlannerTextUI {
 	}
 	
 	/**
+	 * <h1>Priority Chooser</h1>
+	 * <p>
 	 * This function processes the priority choice of the addTask()
 	 * function
 	 * It has a int rChoice to take the value of the user
@@ -177,6 +203,8 @@ public class TodoPlannerTextUI {
 	}
 	
 	/**
+	 * <h1>Task</h1>
+	 * <p>
 	 * This function will take all of the methods used above:
 	 * processUserTitle() and processPriority() combined
 	 * In order to add this item to the TodoPlanner(Task)
@@ -196,6 +224,8 @@ public class TodoPlannerTextUI {
 	}
 	
 	/**
+	 * <h1>Meeting</h1>
+	 * <p>
 	 * This function will take all of the methods used above:
 	 * processUserTitle()
 	 * In order to add this item to the TodoPlanner(Meeting)
@@ -217,6 +247,8 @@ public class TodoPlannerTextUI {
 	}
 	
 	/**
+	 * <h1>Deadline</h1>
+	 * <p>
 	 * This function will take all of the methods used above:
 	 * processUserTitle()
 	 * In order to add this item to the TodoPlanner(deadline)
@@ -233,5 +265,57 @@ public class TodoPlannerTextUI {
 		TodoPlanner.addTodos(newDeadline);
 		System.out.println("Added deadline: ");
 		newDeadline.printItem();
+	}
+	
+	/**
+	 * <h1>Save to File</h1>
+	 * <p>
+	 * 
+	 * This function will take your string of what you
+	 * want the file to be named.
+	 * <p>
+	 * Then will attempt to save it to somewhere in your direc.
+	 * If not or it already exist then it will print error
+	 * 
+	 */
+	private static void saveListToFile(){
+		System.out.println("Enter name you wish to save File to(do not add .txt): ");
+		String fileName = processUserTitle();
+		
+		try {
+			fh.saveFile(fileName);
+		} 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * <h1>Load From File</h1>
+	 * <p>
+	 * 
+	 * This function will take your string of what you
+	 * want the file to be loaded is.
+	 * <p>
+	 * Then will attempt to load it from somewhere in your direc.
+	 * If not or DNE then it will print error
+	 * 
+	 */
+	private static void loadListFromFile(){
+		System.out.println("Enter name of file you wish to load(do not add .txt): ");
+		String fileName = processUserTitle();
+		
+		try {
+			fh.loadFile(fileName);
+		} 
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} 
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

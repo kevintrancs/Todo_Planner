@@ -4,6 +4,7 @@ public class Deadline extends Todo {
 	private String dueDate;
 
 	/**
+	 * <p>
 	 * Constrcutor to make a new Deadline Object
 	 * @param title String value that goes to super class
 	 * @param dueDate String value that will be stored for time in dueDate variable
@@ -14,6 +15,8 @@ public class Deadline extends Todo {
 	}
 	
 	/**
+	 * <h1>Get Due Date</h1>
+	 * <p>
 	 * Returns the current String value of the dueDate variable
 	 * @return this.dueDate
 	 */
@@ -22,6 +25,8 @@ public class Deadline extends Todo {
 	}
 	
 	/**
+	 * <h1>Overriden Print Item</h1>
+	 * <p>
 	 * This method is an overriden method of the super class
 	 * It will print out all of the important information about
 	 * this specific object 

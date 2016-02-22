@@ -26,10 +26,12 @@ public class Task extends Todo {
 	}
 	
 	/**
+	 * <h1>Priority Chooser</h1>
+	 * <p>
 	 * Returns a priority that is currently set to the Task Object that 
 	 * we have currently
 	 * Uses a switch to determine what we have
-	 * @return Priority or null if none
+	 * @return Priority -  null if none
 	 */
 	public Priority getPriority(){
 		switch(prio){
@@ -46,6 +48,8 @@ public class Task extends Todo {
 	}
 	
 	/**
+	 * <h1>Overriden Print Item</h1>
+	 * <p>
 	 * This method is an overriden method of the super class
 	 * It will print out all of the important information about
 	 * this specific object 
