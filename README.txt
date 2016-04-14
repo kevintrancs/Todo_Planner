@@ -1,1 +1,0 @@
-Please don't use this to cheat. Educational purposes only. Thank you. 
